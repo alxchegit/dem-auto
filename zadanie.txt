@@ -23,6 +23,3 @@
 Можно использовать процедурный подход, но большим плюсом будет использование OOП
 
 Результат можно скинуть на почту dmitri.noks@gmail.com с темой письма "ТЗ dem-auto" - архив с дампом базы и исходный код.
-
-
-CREATE TABLE `dem-auto`.`categorys` ( `cat_id` INT NOT NULL AUTO_INCREMENT , `cat_name` VARCHAR(1000) NOT NULL , `cat_url` VARCHAR(1000) NOT NULL , `cat_parent` INT(4) NOT NULL DEFAULT '0' , `meta_title` TEXT NULL , `meta_descr` TEXT NULL , `include_child` INT(1) NOT NULL DEFAULT '0' , `status` INT(1) NOT NULL DEFAULT '1' , PRIMARY KEY (`cat_id`(4))) ENGINE = InnoDB;
