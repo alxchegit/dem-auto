@@ -1,3 +1,4 @@
+<?php include $_SERVER['DOCUMENT_ROOT']."/php/db.php"; ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

@@ -54,7 +54,7 @@ class MyDB
 	public function getCategoryByID($id) {
 		$this->clearOutput($output);
 		$sql = '';
-		$sql = "SELECT `cat_name`, `cat_descr`, `cat_url`, `cat_child` FROM `categories` WHERE `status` = '1' AND `id` = $id";
+		$sql = "SELECT * FROM `categories` WHERE `status` = '1' AND `id` = $id";
 
 		$res = $this->myquery($sql);
 
@@ -66,14 +66,41 @@ class MyDB
 				$output['data'] = $row;
 				}
 			}						
+			$res->close();
 		} else {
 			$output['error'] = "res is not object";
 			}
-			$res->close();
 			return $output;
 	}
 
 
+/**
+*
+*	Получить список верхних категорий
+*
+**/
+public function getCategoryTop() {
+		$this->clearOutput($output);
+		$sql = '';
+		$sql = "SELECT * FROM `categories` WHERE `status` = '1' AND `cat_parent` = '0'";
+
+		$res = $this->myquery($sql);
+
+		if(is_object($res)){
+			if ($res->num_rows == 0) {
+			$output['error'] = "no data";
+			} else {
+			while ($row = $res->fetch_assoc()){
+				// $output['data'] = $row;
+				array_push($output['data'], $row);
+				}
+			}						
+			$res->close();
+		} else {
+			$output['error'] = "res is not object";
+			}
+			return $output;
+	}
 
 
 //************************************************

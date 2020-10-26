@@ -1,4 +1,5 @@
 <?php include("../template/head.php"); ?>
+<!-- <?php foreach ($_SERVER as $parm => $value)  echo "$parm = '$value'<br>"; ?> -->
 
 	<header>
 		<h1>Админка интернет магазина</h1>
@@ -6,12 +7,11 @@
 	</header>
 
 	<div class="left-sidebar">
-		<!-- <?php foreach ($_SERVER as $parm => $value)  echo "$parm = '$value'<br>"; ?> -->
 			
 	</div>
 
 	<div class="main-body"></div>
-	
+
 	<footer></footer>
 
 <?php include("../template/footer.php"); ?>
