@@ -30,7 +30,7 @@
 			<?php } ?>
 				</ul>
 
-			<ul class="nav navbar">
+			 
 				<?php  
 					$category_arr = $mydb->getCategoriesAll();
 
@@ -40,7 +40,7 @@
 					outTree(0, 0, $cat_data);
 					 
 				?>
-			</ul>
+			 
 		</div>
 	</div>
 
