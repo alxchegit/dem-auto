@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.3
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Хост: 10.15.3.2:3306
--- Время создания: Окт 26 2020 г., 16:56
--- Версия сервера: 5.6.37-log
--- Версия PHP: 5.5.38
+-- Хост: 127.0.0.1:3306
+-- Время создания: Окт 26 2020 г., 23:23
+-- Версия сервера: 5.7.23-log
+-- Версия PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `categorys`
+-- Структура таблицы `categories`
 --
 
-CREATE TABLE `categorys` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `cat_name` varchar(250) NOT NULL,
   `cat_parent` int(11) NOT NULL DEFAULT '0',
@@ -38,6 +38,16 @@ CREATE TABLE `categorys` (
   `cat_child` int(1) NOT NULL DEFAULT '0',
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `categories`
+--
+
+INSERT INTO `categories` (`id`, `cat_name`, `cat_parent`, `cat_url`, `meta_title`, `meta_descr`, `cat_child`, `status`) VALUES
+(1, 'Мебель', 0, 'mebel/', '', '', 0, 1),
+(2, 'Телефоны', 0, 'telephone/', '', '', 0, 1),
+(3, 'Кухня', 0, 'kitchen/', '', '', 0, 1),
+(4, 'Телевизоры', 0, 'tv/', '', '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -63,9 +73,9 @@ CREATE TABLE `products` (
 --
 
 --
--- Индексы таблицы `categorys`
+-- Индексы таблицы `categories`
 --
-ALTER TABLE `categorys`
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`),
   ADD KEY `cat_parent` (`cat_parent`),
   ADD KEY `status` (`status`),
@@ -84,15 +94,17 @@ ALTER TABLE `products`
 --
 
 --
--- AUTO_INCREMENT для таблицы `categorys`
+-- AUTO_INCREMENT для таблицы `categories`
 --
-ALTER TABLE `categorys`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

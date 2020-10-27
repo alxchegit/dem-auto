@@ -1,51 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#0058ab">
-    <meta name="msapplication-TileColor" content="#0058ab">
-    <meta name="theme-color" content="#0058ab">
-    <title>ИКЕА - официальный интернет-магазин мебели - IKEA</title>
-    <link rel="stylesheet" href="styles/styles.css">
-<!-- scripts -->
-    <script type="text/javascript" src="script/generateHeader.js" defer></script>
-    <script type="text/javascript" src="script/generateFooter.js" defer></script>
-    <script type="text/javascript" src="script/generateCatalog.js" defer></script>
-    <script type="text/javascript" src="script/main.js" defer></script>
-</head>
-<body>
+<?php include("template/head.php"); ?>
 
-<main>
-    <div class="container">
-        <h1 class="main-header">ИКЕА. Сила дома.</h1>
-        <aside class="offer">
-            <a href="card.html#idd059">
-                <picture>
-                    <source srcset="image/b47e07ee97fd5f9bf030d258d462a945.webp" type="image/webp">
-                    <img src="image/b47e07ee97fd5f9bf030d258d462a945.jpg" alt="СЛАТТУМ">
-                </picture>
+<?php $cat = isset($_GET['cat']) ? $_GET['cat'] : false; ?>
+<?php $id = isset($_GET['id']) ? $_GET['id'] : false; ?>
+<?php 
+	if($id){
+		$category = $mydb->getCategoryByID($id); 		
+	} ?>
 
-            </a>
-            <a class="offer-extra" href="goods.html?subcat=Кровати">
-                <p>Посмотрите, как можно улучшить свой сон</p>
-                <svg focusable="false" viewBox="0 0 24 24" class="offer-arrow" aria-hidden="true">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                          d="M19.2937 12.7074L20.0008 12.0003L19.2938 11.2932L12.0008 3.99927L10.5865 5.41339L16.1727 11.0003H4V13.0003H16.1723L10.5855 18.5868L11.9996 20.0011L19.2937 12.7074Z"></path>
-                </svg>
-            </a>
-        </aside>
-    </div>
+	<header>
+		<h1>Интернет магазин</h1>
+		<a href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
+	</header>
+
+	<div class="left-sidebar">
+		<ul>
+	<?php 
+		$top_cat = $mydb->getCategoryTop();	
+		$data = $top_cat['data'];	
+		foreach ($data as $categories) { ?>
+			<li><a href="/?id=<?php echo $categories['id'];?>&cat=<?php echo $categories['cat_url'];?>"><?php echo $categories['cat_name']; ?></a></li>
+	<?php } ?>
+		</ul>
+	</div>
+
+	<div class="main-body"></div>
+	<main>
+	<div class="container">
+		<h2 class="main-header"><?php echo $category['data']['cat_name']; ?></h2>
+		<div class="goods wrapper">
+			<ul class="goods-list">
+
+				<li class="goods-list__item">
+					<a class="goods-item__link" href="card.html#idd001">
+						<article class="goods-item">
+							<div class="goods-item__img">
+								<img src="https://www.ikea.com/ru/ru/images/products/fabler-byorn-myagkaya-igrushka-bezhevyy__0710165_PE727396_S5.JPG" data-second-image="https://www.ikea.com/ru/ru/images/products/fabler-byorn-myagkaya-igrushka-bezhevyy__0876876_PE611263_S5.JPG" alt="ФАБЛЕР БЬЁРН">
+							</div>
+							<p class="goods-item__new">Новинка</p>
+							<h3 class="goods-item__header">ФАБЛЕР БЬЁРН</h3>
+							<p class="goods-item__description">Мягкая игрушка, бежевый, 21 см</p>
+							<p class="goods-item__price">
+								<span class="goods-item__price-value">99</span>
+								<span class="goods-item__currency"> ₽</span>
+							</p>
+							<button class="btn btn-add-card" aria-label="Добравить в корзину" data-idd="idd001"></button>
+						</article>
+					</a>
+				</li>
+				
+
+			</ul>
+		</div>
+	</div>
 </main>
+	<footer></footer>
 
-<!-- 
-<div class="overlay"></div>  -->
-
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-</body>
-</html>
+<?php include("template/footer.php"); ?>
