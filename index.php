@@ -1,5 +1,4 @@
 <?php include("template/head.php"); ?>
-
 <?php $cat = isset($_GET['cat']) ? $_GET['cat'] : false; ?>
 <?php $id = isset($_GET['id']) ? $_GET['id'] : false; ?>
 <?php 
@@ -7,20 +6,42 @@
 		$category = $mydb->getCategoryByID($id); 		
 	} ?>
 
-	<header>
-		<h1>Интернет магазин</h1>
-		<a href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
+	<header class="header">
+		<div class="container">
+			<div class="row">
+				<h1 class="col-md-6 col-lg-10 col-sm-12">Интернет магазин</h1>
+				<a class="col-md-6 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
+					</div>
+		</div>
 	</header>
+<!-- CATALOG -->
+	<div class="catalog">
+		<div class="container">
+			<ul class="nav navbar">
+			<?php 
+				$top_cat = $mydb->getCategoryTop();	
+				$data = $top_cat['data'];	
+				foreach ($data as $categories) { ?>
+					<li><a href="/?id=<?php echo $categories['id'];?>&cat=<?php echo $categories['cat_url'];?>"><?php echo $categories['cat_name']; ?></a>
 
-	<div class="left-sidebar">
-		<ul>
-	<?php 
-		$top_cat = $mydb->getCategoryTop();	
-		$data = $top_cat['data'];	
-		foreach ($data as $categories) { ?>
-			<li><a href="/?id=<?php echo $categories['id'];?>&cat=<?php echo $categories['cat_url'];?>"><?php echo $categories['cat_name']; ?></a></li>
-	<?php } ?>
-		</ul>
+
+
+					</li>
+			<?php } ?>
+				</ul>
+
+			<ul class="nav navbar">
+				<?php  
+					$category_arr = $mydb->getCategoriesAll();
+
+					// var_dump($category_arr);
+					// test($category_arr['data']);
+					$cat_data = $category_arr['data'];						 
+					outTree(0, 0, $cat_data);
+					 
+				?>
+			</ul>
+		</div>
 	</div>
 
 	<div class="main-body"></div>

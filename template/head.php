@@ -1,4 +1,5 @@
-<?php include $_SERVER['DOCUMENT_ROOT']."/php/db.php"; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/php/db.php"; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT']."/php/functions.php"; ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>

@@ -1,6 +1,6 @@
 <?php
 
-$DB_HOSTNAME = "localhost";
+$DB_HOSTNAME = "10.15.3.2";
 $DB_USERNAME = 'admin';
 $DB_PASSWORD = 'root';
 $DB_DATABASE = 'dem-auto';
@@ -38,11 +38,26 @@ class MyDB
 *	@return 
 */
 	public function getCategoriesAll() {
-		$sql = "SELECT `id`, `cat_name`, `cat_url`, `cat_parent`, `cat_child` FROM `categories` WHERE `status` = '1'";
+		$this->clearOutput($output);
+		$sql = "SELECT * FROM `categories` WHERE `status` = '1'";
 
-		if($res = $this->myquery($sql)){
+		$res = $this->myquery($sql);
 
-		}
+		if(is_object($res)){
+			if ($res->num_rows == 0) {
+			$output['error'] = "no data";
+			} else {
+			while ($row = $res->fetch_assoc()){
+				// array_push($output['data'], $row);
+				$output['data'][$row['cat_parent']][] = $row;
+				}
+			}						
+			$res->close();
+		} else {
+			$output['error'] = "res is not object";
+			}
+			return $output;
+
 	}
 
 /**
@@ -53,7 +68,7 @@ class MyDB
 
 	public function getCategoryByID($id) {
 		$this->clearOutput($output);
-		$sql = '';
+		 
 		$sql = "SELECT * FROM `categories` WHERE `status` = '1' AND `id` = $id";
 
 		$res = $this->myquery($sql);
