@@ -10,6 +10,8 @@
 	<title>Интернет магазин</title>
 
 	<link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/css/bootstrap.3.3.7.css"> -->
 	<link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/css/style.css">
+	<link rel="stylesheet" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/css/admin-style.css">
 </head>
 <body>

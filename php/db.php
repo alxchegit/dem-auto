@@ -1,6 +1,6 @@
 <?php
 
-$DB_HOSTNAME = "10.15.3.2";
+$DB_HOSTNAME = "localhost";
 $DB_USERNAME = 'admin';
 $DB_PASSWORD = 'root';
 $DB_DATABASE = 'dem-auto';
@@ -117,7 +117,25 @@ public function getCategoryTop() {
 			return $output;
 	}
 
+/**
+*
+*	Добавить товар
+*
+*/
 
+public function addProduct($data = array()){
+	$name = $data['name'];
+	$descr = $data['descr'] ;
+	$price = (float)$data['price'];
+	$meta_title = $data['meta_title'];
+	$meta_descr = $data['meta_descr'];
+	$sql = "INSERT INTO `products`(`id`, `prod_name`, `prod_descr`, `prod_price`, `meta_title`, `meta_description`) VALUES (NULL,'$name', '$descr', '$price', '$meta_title', '$meta_descr')";
+
+	$this->myquery($sql);
+
+	$product_id = $this->getlastId();
+	return $product_id;
+}
 //************************************************
 	private function clearOutput(&$output = ""){
 		$output = $this->clear;		

@@ -17,37 +17,25 @@
 <!-- CATALOG -->
 	<div class="catalog">
 		<div class="container">
-			<ul class="nav navbar">
-			<?php 
-				$top_cat = $mydb->getCategoryTop();	
-				$data = $top_cat['data'];	
-				foreach ($data as $categories) { ?>
-					<li><a href="/?id=<?php echo $categories['id'];?>&cat=<?php echo $categories['cat_url'];?>"><?php echo $categories['cat_name']; ?></a>
-
-
-
-					</li>
-			<?php } ?>
-				</ul>
-
-			 
-				<?php  
-					$category_arr = $mydb->getCategoriesAll();
-
-					// var_dump($category_arr);
-					// test($category_arr['data']);
-					$cat_data = $category_arr['data'];						 
-					outTree(0, 0, $cat_data);
-					 
-				?>
-			 
+			<?php  
+				$category_arr = $mydb->getCategoriesAll();
+				  
+				$cat_data = $category_arr['data'];						 
+				outCatTree(0, 0, $cat_data);					 
+			?>			 
 		</div>
 	</div>
 
 	<div class="main-body"></div>
 	<main>
 	<div class="container">
-		<h2 class="main-header"><?php echo $category['data']['cat_name']; ?></h2>
+		<h2 class="main-header"><?php 
+			if($category['data']['cat_name']) {
+				echo $category['data']['cat_name']; 
+			} else {
+				echo "Витрина интернет магазина.Главная страница";
+			}
+		?></h2>
 		<div class="goods wrapper">
 			<ul class="goods-list">
 
@@ -68,10 +56,9 @@
 						</article>
 					</a>
 				</li>
-				
-
 			</ul>
 		</div>
+
 	</div>
 </main>
 	<footer></footer>
