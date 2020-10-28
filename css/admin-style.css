@@ -13,6 +13,7 @@ option.level-0 {
 
 .goods-edit {
 	margin-bottom: 25px;
+	text
 }
 .goods-edit table {
 	width: 100%;
@@ -37,20 +38,56 @@ option.level-0 {
 .goods-edit tbody {
 	border: 2px solid #637d94;	
 }
-
+.goods-edit th:first-child {
+	width: 20%;
+}
+.goods-edit th:nth-child(2) {
+	width: 150px;
+}
+.goods-edit th:nth-child(3) {
+	width: 300px;
+}
+.goods-edit th:nth-child(5) {
+	width: 150px;
+}
+.goods-edit th:nth-child(6) {
+	width: 150px;
+}
+.goods-edit td {
+	border-right: 1px solid grey;
+}
 .goods-edit tr {
 	border-bottom: 1px solid #9fb4c5;
 	cursor: pointer;
+	/*height: 80px;*/
 }
 .goods-edit tr:hover {
 	background-color: lightgrey;
 }
 .goods-edit .descriptions {
-	width: 400px;
-    height: 100px;
+	width: 300px;
+    height: 80px;
     overflow: auto;
 }
 
+.goods-edit .meat-title {
+	width: 150px;
+    height: 80px;
+    overflow: auto;
+}
+.goods-edit .meta-description {
+	width: 150px;
+    height: 80px;
+    overflow: auto;
+}
+.goods-edit .price {
+	background-color: aliceblue;
+}
+
+.categories_list{
+	max-width: 120px;
+	height: 80px;
+}
 .form_div {
 	display: none;
 }

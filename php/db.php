@@ -1,6 +1,6 @@
 <?php
 
-$DB_HOSTNAME = "10.15.3.2";
+$DB_HOSTNAME = "localhost";
 $DB_USERNAME = 'admin';
 $DB_PASSWORD = 'root';
 $DB_DATABASE = 'dem-auto';
@@ -233,6 +233,41 @@ public function addProduct($data = array()){
 		}
 	}
 	return $product_id;
+}
+
+/**
+*
+* 	Изменить товар
+*
+*/
+
+public function editProduct($data){
+	$name = $this->escape($data['name']);
+	$descr = $this->escape($data['descr']) ;
+	$price = (float)$data['price'];
+	$meta_title = $this->escape($data['meta_title']);
+	$meta_descr = $this->escape($data['meta_descr']);
+	$categories = json_decode( $data['categories']);
+	$id 		= $data['id'];
+
+	$sql = "UPDATE `products` SET `prod_name`= '$name', `prod_descr`= '$descr', `prod_price`='$price', `meta_title`='$meta_title',`meta_description`= '$meta_descr' WHERE `products`.`id` = " .(int)$id;
+
+	$res = $this->myquery($sql);
+
+	if(isset($categories)){
+		$this->myquery("DELETE FROM `product_to_cat` WHERE `prod_id` = " . (int)$id);
+		
+		foreach ($categories as $category_id) {
+			$this->myquery("INSERT INTO `product_to_cat` SET prod_id = '" . (int)$id . "', cat_id = '" . (int)$category_id . "'");
+		}
+	}
+
+	if($res){
+		return $this->getlastId();
+	} else {
+		return $this->link->error;
+	}
+
 }
 //************************************************
 	private function clearOutput(&$output = ""){

@@ -25,6 +25,10 @@
 			$result = $mydb->getSingleProduct($data['id']);
 			
 			break;
+		case 'edit':
+			$result = $mydb->editProduct($data);
+			
+			break;
 		default:
 			# code...
 			break;

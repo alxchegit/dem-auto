@@ -45,7 +45,7 @@
 			</div>
 			<div class="form-group">
 				<label for="goods-m-descr">Мета-тег Description:</label>
-				<input type="text" class="form-control"  id="goods-m-descr" name="meta_title">
+				<input type="text" class="form-control"  id="goods-m-descr" name="meta_descr">
 			</div>
 			<div class="form-group">
 				<label for="price">Категории:</label>
@@ -57,8 +57,8 @@
 					 ?>
 				</select>
 			</div>						
-				<button class="btn btn-primary" id="goods-form__submit">Добавить</button>
-			</form>
+			<button class="btn btn-primary" id="goods-form__submit">Добавить</button>
+		</form>
 
 		</div> <!-- добавить -->
 		<div class="tab-pane container fade clearfix" id="goods-edit">
@@ -68,7 +68,7 @@
 					<table>
 						<thead>
 						  <tr>                 
-							<th>ID</th>
+							<th style="display: none;">ID</th>
 							<th>Название</th>
 							<th>Категория</th>
 							<th>Описание</th>
@@ -104,18 +104,18 @@
 						</div>
 						<div class="form-group">
 							<label for="goods-edit-m-descr">Мета-тег Description:</label>
-							<input type="text" class="form-control"  id="goods-edit-m-descr" name="meta_title">
+							<input type="text" class="form-control"  id="goods-edit-m-descr" name="meta_descr">
 						</div>
 						<div class="form-group">
 							<label for="goods-edit-to-categories">Категории:</label>
-							<select id="ggoods-edit-to-categories" class="form-control" multiple >
+							<select id="goods-edit-to-categories" class="form-control" multiple >
 								<?php 
 									showAllCategoriesForSelect(0, 0, $cat['data']);
 								 ?>
 							</select>
 						</div>
 						<div id="goods-edit-prod_id" style="display: none;"></div>
-						<button class="btn btn-primary float-left" id="goods-edit-form__submit">Добавить</button>
+						<button class="btn btn-primary float-left" id="goods-edit-form__submit">Изменить</button>
 						<button class="btn btn-danger float-right" id="goods-edit-form__delete">Удалить</button>
 					</form>
 				</div>

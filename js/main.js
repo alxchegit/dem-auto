@@ -1,12 +1,11 @@
 $("#goods-form__submit").on("click", function(){
 	
-	let categories = $("#goods-to-categories").val();
+	/*let categories = $("#goods-to-categories").val();
 	
 	categories = JSON.stringify(categories);
 	
 	let data_url = $( ".goods-add-form" ).serialize();
 		data_url += "&categories="+categories; 
-	console.log(data_url);
 		
 	$.ajax({
 		url: "goods.php?action=add&" + data_url,
@@ -18,7 +17,8 @@ $("#goods-form__submit").on("click", function(){
 			alert(ajax_error(jqXHR, exception));
 			console.log(ajax_error(jqXHR, exception));
 		},
-	})
+	})*/
+	goodsToDB("add", $(this));
 })
 
 $("#getGoods").on("click", function(){
@@ -56,27 +56,52 @@ $("#description").on("focusin", function(){
 });
 
 $(".goods-edit__Tbody").on("click", "tr", function(){
-	let start_table_div = $(".goods-edit.start_table");
-	let goods_edit_div = $(".goods-edit.form_div");
 	let row = $(this);
 	let td_row = row.find("td")[0];
 	 
+	switchEditTabs();
 	// console.log(td_row.innerHTML)
-	putGoodsToEditForm(td_row.innerHTML);
-	
-	start_table_div.toggleClass('active').toggleClass('fade');
-	goods_edit_div.toggleClass('active').toggleClass('fade').toggleClass("show");		
-	
+	putGoodsToEditForm(td_row.innerHTML);	
 });
 
-$(".form_div>button").on("click", function(){
-	$(".goods-edit.start_table").toggleClass('active').toggleClass('fade');
-	$(".goods-edit.form_div").toggleClass('active').toggleClass('fade').toggleClass("show");
+$(".form_div>button").on("click", switchEditTabs);
+
+$("#goods-edit-form__submit").on("click", function(){
+	let prod_id = $("#goods-edit-prod_id").html();
+	// console.log(prod_id);
+	// return;
+	goodsToDB("edit", $(this), prod_id );
 });
 
 //FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  //
 
+function goodsToDB(action, button, prod_id = 0, ){
+	let form = button.closest("form");
+	let categories = form.find("select").val();
+	
+	categories = JSON.stringify(categories);
+	
+	let data_url = form.serialize();
+		data_url += "&categories="+categories; 
+		data_url += "&id=" + prod_id;
+	$.ajax({
+		url: "goods.php?action="+action+"&" + data_url,
+		success: function(data){
 
+			alert("Товар успешно " + (action === "add" ? "добавлен" : "изменен") + "! Товар занесен в базу, id=" + data);
+			location.reload();
+		},
+		error: function (jqXHR, exception) {
+			alert(ajax_error(jqXHR, exception));
+			console.log(ajax_error(jqXHR, exception));
+		},
+	})
+};
+
+function switchEditTabs(){
+	$(".goods-edit.start_table").toggleClass('active').toggleClass('fade');
+	$(".goods-edit.form_div").toggleClass('active').toggleClass('fade').toggleClass("show");
+}
 
 function putGoodsToEditForm(prod_id){
 	let name_inp = $("#goods-edit-name");
@@ -130,15 +155,23 @@ function putGoodsInTable(data) {
 	let html = '';
 	$.each(goods, function(indx, elem){
 		html += "<tr>";
-		html += "<td>" +elem['id']+ "</td>";
+		html += "<td style='display:none;'>" +elem['id']+ "</td>";
 		html += "<td>" +elem['prod_name']+ "</td>";
-		html += "<td>" +elem['categories']+ "</td>";
+		html += "<td>" +categoriesOut(elem['categories'])+ "</td>";
 		html += "<td><div class='descriptions'>"+ elem['prod_descr'] + "</div></td>";
-		html += "<td>" +elem['prod_price']+ "</td>";
-		html += "<td>" +elem['meta_title']+ "</td>";
-		html += "<td>" +elem['meta_description']+ "</td>";	
+		html += "<td class='price'>" +elem['prod_price']+ "</td>";
+		html += "<td><div class='meat-title'>" +elem['meta_title']+ "</div</td>";
+		html += "<td><div class='meta-description'>" +elem['meta_description']+ "</div></td>";	
 		html += "</tr>";
 	});
 	return html;
-
 };
+
+function categoriesOut(cat_array){
+	let html = "<ul class='categories_list'>";
+	for(let i in cat_array){
+		html += "<li>"+cat_array[i]+"</li>";
+	}
+	html += "</ul>";
+	return html;
+}
