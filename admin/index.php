@@ -62,24 +62,41 @@
 
 		</div> <!-- добавить -->
 		<div class="tab-pane container fade clearfix" id="goods-edit">
-			<div class="edit-goods">
-			<table>
-				<thead>
-				  <tr>                 
-					<th>ID</th>
-					<th>Название</th>
-					<th>Описание</th>
-					<th>Цена</th>
-					<th>Meta-title</th>
-					<th>Meta-description</th>
-					  
-		  			</tr>				   
-				</thead>
-				<tbody class="edit-goods__Tbody"></tbody>
-			</table>
-		</div>
-		<button type="button" class="btn float-right btn-primary" id="getGoods">Получить</button>
-		</div> <!-- Редактировать -->
+			<div class="tab-content"><div class="goods-edit start_table active tab-pane">
+							<table>
+								<thead>
+								  <tr>                 
+									<th>ID</th>
+									<th>Название</th>
+									<th>Категория</th>
+									<th>Описание</th>
+									<th>Цена</th>
+									<th>Meta-title</th>
+									<th>Meta-description</th>					  
+					  				</tr>				   
+								</thead>
+								<tbody class="goods-edit__Tbody"></tbody>
+							</table>
+							<button type="button" class="btn float-right btn-primary" id="getGoods">Получить</button>
+						</div>
+			
+						<div class="goods-edit form_div fade tab-pane">
+							<button type="button" class="btn btn-primary">Назад</button>
+							<table>
+								<thead>
+								  <tr>                 
+									<th>ID</th>
+									<th>Название</th>
+									<th>Описание</th>
+									<th>Цена</th>
+									<th>Meta-title</th>
+									<th>Meta-description</th>						  
+						  			</tr>				   
+								</thead>
+								<tbody class="product_edit"></tbody>
+							</table>
+						</div>
+					</div> </div><!-- Редактировать -->
 		 
 	</div> <!-- tab-content -->
 			

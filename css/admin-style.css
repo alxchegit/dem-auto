@@ -11,19 +11,19 @@ option.level-0 {
 	border-radius:0 0 15px 5px;
 }
 
-.edit-goods {
+.goods-edit {
 	margin-bottom: 25px;
 }
-.edit-goods table {
+.goods-edit table {
 	width: 100%;
 	text-align: center;
 }
 
-.edit-goods thead {
+.goods-edit thead {
 	border: 2px solid #637d94;
 	
 }
-.edit-goods thead th {
+.goods-edit thead th {
 		border: 1px solid #acbfd0;
 	    background-color: #637d94;
 	    color: aliceblue;
@@ -33,16 +33,20 @@ option.level-0 {
 	    letter-spacing: 1px;
 	}
 
-.edit-goods tbody {
+.goods-edit tbody {
 	border: 2px solid #637d94;	
 }
 
-.edit-goods tr {
+.goods-edit tr {
 		border-bottom: 1px solid #9fb4c5;
 	}
 
-.edit-goods .descriptions {
+.goods-edit .descriptions {
 	width: 400px;
     height: 100px;
     overflow: auto;
+}
+
+.form_div {
+	display: none;
 }

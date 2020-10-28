@@ -13,7 +13,6 @@ $("#goods-form__submit").on("click", function(){
 		success: function(data){
 			alert("Товар успешно добавлен! Товар занесен в базу, id=" + data);
 			location.reload(); 
-
 		},
 		error: function (jqXHR, exception) {
 			alert(ajax_error(jqXHR, exception));
@@ -23,11 +22,12 @@ $("#goods-form__submit").on("click", function(){
 })
 
 $("#getGoods").on("click", function(){
-	let div = $(".edit-goods__Tbody");
-		div.html("пример");
+	let div = $(".goods-edit__Tbody");
+		div.html("<tr><td colspan='6' ><div class='spinner-border text-primary' ></td></tr></div>");
 	$.ajax({
 		url:"goods.php?action=getgoods",
 		success: function(data){
+			
 			div.html(putGoodsInTable(data));
 			// console.log(putGoodsInTable(data));
 		},
@@ -55,10 +55,22 @@ $("#description").on("focusin", function(){
 	return true;
 });
 
-$(".edit-goods__Tbody tr").on("click", function(){
-	let td_row = $(this);
-	console.log(td_row);
-	console.log("+");
+$(".goods-edit__Tbody").on("click", "tr", function(){
+	let start_table_div = $(".goods-edit.start_table");
+	let goods_edit_div = $(".goods-edit.form_div");
+	let td_row = $(this).html();
+	// let id = td_row.find(".id").html();
+	
+	$(".product_edit").html(td_row);
+
+	start_table_div.toggleClass('active').toggleClass('fade');
+	goods_edit_div.toggleClass('active').toggleClass('fade').toggleClass("show");		
+	
+});
+
+$(".form_div>button").on("click", function(){
+	$(".goods-edit.start_table").toggleClass('active').toggleClass('fade');
+	$(".goods-edit.form_div").toggleClass('active').toggleClass('fade').toggleClass("show");
 });
 
 //FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  //
@@ -77,10 +89,8 @@ function ajax_error(jqXHR, exception){
 	} else {
 		msg = 'Непредвиденная ошибка.\n' + jqXHR.responseText;
 	}
-
 	return msg;
 }
-
 
 function putGoodsInTable(data) {
 	let goods = $.parseJSON(data)['data'];
@@ -91,10 +101,11 @@ function putGoodsInTable(data) {
 		html += "<tr>";
 		html += "<td>" +elem['id']+ "</td>";
 		html += "<td>" +elem['prod_name']+ "</td>";
+		html += "<td>" +elem['categories']+ "</td>";
 		html += "<td><div class='descriptions'>"+ elem['prod_descr'] + "</div></td>";
 		html += "<td>" +elem['prod_price']+ "</td>";
 		html += "<td>" +elem['meta_title']+ "</td>";
-		html += "<td>" +elem['meta_description']+ "</td>";		
+		html += "<td>" +elem['meta_description']+ "</td>";	
 		html += "</tr>";
 	});
 	return html;

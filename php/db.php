@@ -134,8 +134,11 @@ public function getGoods(){
 		} else {
 		while ($row = $res->fetch_assoc()){
 			// $output['data'] = $row;
+			$category = $this->getCategoryByProductID($row['id']);
+			$row['categories'] = $category;
 			array_push($output['data'], $row);
 			}
+
 		}						
 		$res->close();
 	} else {
@@ -143,6 +146,34 @@ public function getGoods(){
 		}
 	return json_encode($output);
 
+}
+
+/**
+*
+*	Получить список категорий которым принадлежит товар
+*
+*/
+
+public function getCategoryByProductID($prod_id){
+	$this->clearOutput($output);
+	$sql = "SELECT `categories`.`cat_name` FROM `products` JOIN `product_to_cat` ON `products`.`id` = `product_to_cat`.`prod_id` JOIN `categories` ON `product_to_cat`.`cat_id` = `categories`.`id` WHERE `products`.`id` = $prod_id";
+
+	$res = $this->myquery($sql);
+
+	if(is_object($res)){
+		if ($res->num_rows == 0) {
+		$output['error'] = "no data";
+		} else {
+		while ($row = $res->fetch_assoc()){
+			// $output['data'] = $row;
+			array_push($output['data'], $row['cat_name']);
+			}
+		}
+		$res->close();
+	} else {
+		$output['error'] = "res is not object";
+		}
+	return $output['data'];
 }
 
 /**
