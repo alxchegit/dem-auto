@@ -62,41 +62,65 @@
 
 		</div> <!-- добавить -->
 		<div class="tab-pane container fade clearfix" id="goods-edit">
-			<div class="tab-content"><div class="goods-edit start_table active tab-pane">
-							<table>
-								<thead>
-								  <tr>                 
-									<th>ID</th>
-									<th>Название</th>
-									<th>Категория</th>
-									<th>Описание</th>
-									<th>Цена</th>
-									<th>Meta-title</th>
-									<th>Meta-description</th>					  
-					  				</tr>				   
-								</thead>
-								<tbody class="goods-edit__Tbody"></tbody>
-							</table>
-							<button type="button" class="btn float-right btn-primary" id="getGoods">Получить</button>
+			<div class="tab-content">
+				<div class="goods-edit start_table active tab-pane">
+					<h3 class="text-center">Поиск</h3>
+					<table>
+						<thead>
+						  <tr>                 
+							<th>ID</th>
+							<th>Название</th>
+							<th>Категория</th>
+							<th>Описание</th>
+							<th>Цена</th>
+							<th>Meta-title</th>
+							<th>Meta-description</th>					  
+			  				</tr>				   
+						</thead>
+						<tbody class="goods-edit__Tbody"></tbody>
+					</table>
+					<button type="button" class="btn float-right btn-primary" id="getGoods">Получить</button>
+				</div>
+	
+				<div class="goods-edit form_div fade tab-pane">
+					<h3 class="text-center">Редактирование</h3>
+					<button type="button" class="btn btn-primary">Назад</button>
+					<form class="goods-edit-form" action="javascript:void(0);">
+						<div class="form-group">
+							<label for="goods-edit-name">Название</label>
+							<input type="text" class="form-control" placeholder="Название товара" name="name" id="goods-edit-name">
 						</div>
-			
-						<div class="goods-edit form_div fade tab-pane">
-							<button type="button" class="btn btn-primary">Назад</button>
-							<table>
-								<thead>
-								  <tr>                 
-									<th>ID</th>
-									<th>Название</th>
-									<th>Описание</th>
-									<th>Цена</th>
-									<th>Meta-title</th>
-									<th>Meta-description</th>						  
-						  			</tr>				   
-								</thead>
-								<tbody class="product_edit"></tbody>
-							</table>
+						<div class="form-group">
+							<label for="goods-edit-description">Описание</label>
+							<textarea class="form-control" id="goods-edit-description" rows="4" maxlength="1000" name="descr"></textarea>
 						</div>
-					</div> </div><!-- Редактировать -->
+						<div class="form-group">
+							<label for="goods-edit-price">Цена:</label>
+							<input type="number" class="form-control" placeholder="Цена" id="goods-edit-price" name="price">
+						</div>
+						<div class="form-group">
+							<label for="goods-edit-m-title">Мета-тег Title:</label>
+							<input type="text" class="form-control"  id="goods-edit-m-title" name="meta_title">
+						</div>
+						<div class="form-group">
+							<label for="goods-edit-m-descr">Мета-тег Description:</label>
+							<input type="text" class="form-control"  id="goods-edit-m-descr" name="meta_title">
+						</div>
+						<div class="form-group">
+							<label for="goods-edit-to-categories">Категории:</label>
+							<select id="ggoods-edit-to-categories" class="form-control" multiple >
+								<?php 
+									showAllCategoriesForSelect(0, 0, $cat['data']);
+								 ?>
+							</select>
+						</div>
+						<div id="goods-edit-prod_id" style="display: none;"></div>
+						<button class="btn btn-primary float-left" id="goods-edit-form__submit">Добавить</button>
+						<button class="btn btn-danger float-right" id="goods-edit-form__delete">Удалить</button>
+					</form>
+				</div>
+			</div> 
+		</div><!-- Редактировать -->
 		 
 	</div> <!-- tab-content -->
 			

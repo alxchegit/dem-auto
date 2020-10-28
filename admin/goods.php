@@ -9,19 +9,25 @@
 	$data['meta_title'] = isset($_GET['meta_title']) ? $_GET['meta_title'] : "";
 	$data['meta_descr'] = isset($_GET['meta_descr']) ? $_GET['meta_descr'] : "";
 	$data['categories'] = isset($_GET['categories']) ? $_GET['categories'] : array();
+	$data['id'] = isset($_GET['id']) ? $_GET['id'] : "1";
 
 	
 	switch ($action) {
 		case 'add':
-			$goods_prod_id = $mydb->addProduct($data);
-
-			echo $goods_prod_id;
+			$result = $mydb->addProduct($data);
+			
 			break;
 		case 'getgoods':
-			$goods_data = $mydb->getGoods();
-			echo $goods_data;
+			$result = $mydb->getGoods();
+			 
+			break;
+		case 'getsingleproduct':
+			$result = $mydb->getSingleProduct($data['id']);
+			
 			break;
 		default:
 			# code...
 			break;
 	}
+
+	echo $result;

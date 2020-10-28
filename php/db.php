@@ -134,8 +134,7 @@ public function getGoods(){
 		} else {
 		while ($row = $res->fetch_assoc()){
 			// $output['data'] = $row;
-			$category = $this->getCategoryByProductID($row['id']);
-			$row['categories'] = $category;
+			$row['categories'] = $this->getCategoryByProductID($row['id']);
 			array_push($output['data'], $row);
 			}
 
@@ -147,6 +146,37 @@ public function getGoods(){
 	return json_encode($output);
 
 }
+
+/**
+*
+*	Получить продукт по ID
+*
+*/
+
+public function getSingleProduct($prod_id){
+	$this->clearOutput($output);
+	$sql = "SELECT * FROM `products` WHERE `id` = $prod_id";
+
+	$res = $this->myquery($sql);
+
+	if(is_object($res)){
+		if ($res->num_rows == 0) {
+		$output['error'] = "no data";
+		} else {
+		while ($row = $res->fetch_assoc()){
+			// $output['data'] = $row;
+			$row['categories'] = $this->getCategoryByProductID($prod_id);
+			array_push($output['data'], $row);
+			}
+		}
+		$res->close();
+	} else {
+		$output['error'] = "res is not object";
+		}
+	return json_encode($output);
+
+}
+
 
 /**
 *

@@ -17,6 +17,7 @@ option.level-0 {
 .goods-edit table {
 	width: 100%;
 	text-align: center;
+	background-color: white;
 }
 
 .goods-edit thead {
@@ -38,9 +39,12 @@ option.level-0 {
 }
 
 .goods-edit tr {
-		border-bottom: 1px solid #9fb4c5;
-	}
-
+	border-bottom: 1px solid #9fb4c5;
+	cursor: pointer;
+}
+.goods-edit tr:hover {
+	background-color: lightgrey;
+}
 .goods-edit .descriptions {
 	width: 400px;
     height: 100px;
