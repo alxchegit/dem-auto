@@ -9,9 +9,9 @@
 	<header class="header">
 		<div class="container">
 			<div class="row">
-				<h1 class="col-md-6 col-lg-10 col-sm-12">Интернет магазин</h1>
+				<h1 class="col-md-6 col-lg-10 col-sm-12"><a href="/">Интернет магазин</a></h1>
 				<a class="col-md-6 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
-					</div>
+			</div>
 		</div>
 	</header>
 <!-- CATALOG -->
@@ -19,7 +19,7 @@
 		<div class="container">
 			<?php  
 				$category_arr = $mydb->getCategoriesAll();
-				  
+
 				$cat_data = $category_arr['data'];						 
 				outCatTree(0, 0, $cat_data);					 
 			?>			 
@@ -29,7 +29,7 @@
 	<div class="main-body"></div>
 	<main>
 	<div class="container">
-		<h2 class="main-header"><?php 
+		<h2 class="main-header text-center"><?php 
 			if($category['data']['cat_name']) {
 				echo $category['data']['cat_name']; 
 			} else {

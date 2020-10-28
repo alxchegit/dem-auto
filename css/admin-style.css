@@ -1,3 +1,48 @@
 option.level-0 {
 	font-weight: bold;
 }
+
+.admin-content {
+	
+	background-color: #eaeaea;
+	padding: 10px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	border-radius:0 0 15px 5px;
+}
+
+.edit-goods {
+	margin-bottom: 25px;
+}
+.edit-goods table {
+	width: 100%;
+	text-align: center;
+}
+
+.edit-goods thead {
+	border: 2px solid #637d94;
+	
+}
+.edit-goods thead th {
+		border: 1px solid #acbfd0;
+	    background-color: #637d94;
+	    color: aliceblue;
+	    font-family: sans-serif;
+	    padding: 4px;
+	    font-weight: 400;
+	    letter-spacing: 1px;
+	}
+
+.edit-goods tbody {
+	border: 2px solid #637d94;	
+}
+
+.edit-goods tr {
+		border-bottom: 1px solid #9fb4c5;
+	}
+
+.edit-goods .descriptions {
+	width: 400px;
+    height: 100px;
+    overflow: auto;
+}

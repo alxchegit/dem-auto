@@ -1,6 +1,6 @@
 <?php
 
-$DB_HOSTNAME = "localhost";
+$DB_HOSTNAME = "10.15.3.2";
 $DB_USERNAME = 'admin';
 $DB_PASSWORD = 'root';
 $DB_DATABASE = 'dem-auto';
@@ -119,21 +119,58 @@ public function getCategoryTop() {
 
 /**
 *
+*	Получить список всех товаров
+*
+*/
+
+public function getGoods(){
+	$this->clearOutput($output);
+	$sql = "SELECT * FROM `products` ";
+
+	$res = $this->myquery($sql);
+	if(is_object($res)){
+		if ($res->num_rows == 0) {
+		$output['error'] = "no data";
+		} else {
+		while ($row = $res->fetch_assoc()){
+			// $output['data'] = $row;
+			array_push($output['data'], $row);
+			}
+		}						
+		$res->close();
+	} else {
+		$output['error'] = "res is not object";
+		}
+	return json_encode($output);
+
+}
+
+/**
+*
 *	Добавить товар
 *
 */
 
 public function addProduct($data = array()){
-	$name = $data['name'];
-	$descr = $data['descr'] ;
+	
+	$name = $this->escape($data['name']);
+	$descr = $this->escape($data['descr']) ;
 	$price = (float)$data['price'];
-	$meta_title = $data['meta_title'];
-	$meta_descr = $data['meta_descr'];
+	$meta_title = $this->escape($data['meta_title']);
+	$meta_descr = $this->escape($data['meta_descr']);
+	$categories = json_decode( $data['categories']);
+
 	$sql = "INSERT INTO `products`(`id`, `prod_name`, `prod_descr`, `prod_price`, `meta_title`, `meta_description`) VALUES (NULL,'$name', '$descr', '$price', '$meta_title', '$meta_descr')";
 
 	$this->myquery($sql);
 
 	$product_id = $this->getlastId();
+
+	if (isset($categories)) {
+		foreach ($categories as $category_id) {
+			$this->myquery("INSERT INTO `product_to_cat` SET prod_id = '" . (int)$product_id . "', cat_id = '" . (int)$category_id . "'");
+		}
+	}
 	return $product_id;
 }
 //************************************************

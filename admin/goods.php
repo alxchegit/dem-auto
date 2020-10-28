@@ -7,7 +7,8 @@
 	$data['descr'] = isset($_GET['descr']) ? $_GET['descr'] : "";
 	$data['price'] = isset($_GET['price']) ? $_GET['price'] : "";
 	$data['meta_title'] = isset($_GET['meta_title']) ? $_GET['meta_title'] : "";
-	$data['meta_desc'] = isset($_GET['meta_desc']) ? $_GET['meta_desc'] : "";
+	$data['meta_descr'] = isset($_GET['meta_descr']) ? $_GET['meta_descr'] : "";
+	$data['categories'] = isset($_GET['categories']) ? $_GET['categories'] : array();
 
 	
 	switch ($action) {
@@ -16,7 +17,10 @@
 
 			echo $goods_prod_id;
 			break;
-		
+		case 'getgoods':
+			$goods_data = $mydb->getGoods();
+			echo $goods_data;
+			break;
 		default:
 			# code...
 			break;

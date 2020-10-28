@@ -186,6 +186,10 @@ h1, h2, h3, p {
 	align-items: center;
 }
 
+h1 a:hover {
+	text-decoration: none;
+	color: inherit;
+}
 /*CATALOG  CATALOG  CATALOG  CATALOG  CATALOG  CATALOG  CATALOG  CATALOG  CATALOG  */
 
 .catalog {
@@ -213,7 +217,7 @@ h1, h2, h3, p {
 .main-header {
 	padding: 20px;
 	text-align: center;
-	
+	margin: 10px 0px;
 }
 
 /*MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  MEDIA  */
