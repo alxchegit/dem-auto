@@ -1,29 +1,30 @@
 <?php include("../template/head.php"); ?>
+<!-- HEADER -->
 	<header class="header">
 		<div class="container">
 			<div class="row">
-				<h1 class="col-md-6 col-lg-10 col-sm-12">Интернет магазин</h1>
-				<a class="col-md-6 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>" class="btn-right">Exit</a>
+				<h1 class="col-md-10 col-lg-10 col-sm-12">Интернет магазин</h1>
+				<a class="col-md-2 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>" class="btn-right">Exit</a>
 			</div>
 		</div>
 	</header> 
-
-	<div class="main-body container">
+<!-- MAIN -->
+	<div class="admin main-body XcontainerX">
 		<h2 class="main-header text-center">Админка</h2>
-		<p class="alert alert-info">Страница добавления/удаления товаров, а также их редактирования.</p>
+		<p class="alert alert-info">Страница добавления/удаления товаров, а также их редактирования. На закладке "Редактирование" произведите поиск всех товаров. При нажатии на строке с необходимым товаром, откроется форма редактирования или удаления товара</p>
 		 
-	<ul class="nav nav-pills nav-justified ">
-	<li class="nav-item">
-		<a class="nav-link active" data-toggle="pill" href="#goods-add">Добавить</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" data-toggle="pill" href="#goods-edit">Редактировать</a>
-	</li>
-	 
-	</ul>
+		<ul class="nav nav-pills nav-justified ">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="pill" href="#goods-add">Добавить</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="pill" href="#goods-edit">Редактировать</a>
+			</li>
+		 
+		</ul>
  
 	<div class="tab-content admin-content">
-		<div class="tab-pane container active" id="goods-add">
+		<div class="tab-pane XcontainerX active" id="goods-add">
 		<h3 class="text-center">Добавить</h3>
 		<form class="goods-add-form" action="javascript:void(0);">
 			<div class="form-group">
@@ -59,7 +60,7 @@
 		</form>
 
 		</div> <!-- добавить -->
-		<div class="tab-pane container fade clearfix" id="goods-edit">
+		<div class="tab-pane XcontainerX fade clearfix" id="goods-edit">
 			<div class="tab-content">
 				<div class="goods-edit start_table active tab-pane">
 					<h3 class="text-center">Поиск</h3>

@@ -1,34 +1,22 @@
 <?php
 
-// $DB_HOSTNAME = "10.15.3.2";
-// $DB_USERNAME = 'admin';
-// $DB_PASSWORD = 'root';
-// $DB_DATABASE = 'dem-auto';
-
 /**
- * 
+ *  Работа с Базой Данных
  */
 class MyDB
 {
-	private $DB_HOSTNAME = "10.15.3.2";
+	private $DB_HOSTNAME = "localhost";
 	private $DB_USERNAME = 'admin';
 	private $DB_PASSWORD = 'root';
 	private $DB_DATABASE = 'dem-auto';
 	private $link;
 	private $clear = array('data' => array(), 'error' => array());
 
-	/*public function __construct($host,$username,$password,$database){
-		$this->link = new mysqli($host,$username,$password,$database);
-		if ($this->link->connect_error) {
-      		trigger_error('error: Could not make a database link (' . $this->link->connect_errno . ') ' . $this->link->connect_error);
-		}
-	}
-	*/
 	public function __construct(){
-		$host = $this->DB_HOSTNAME;
-		$username = $this->DB_USERNAME;
-		$password = $this->DB_PASSWORD;
-		$database = $this->DB_DATABASE;
+		$host 		= $this->DB_HOSTNAME;
+		$username 	= $this->DB_USERNAME;
+		$password 	= $this->DB_PASSWORD;
+		$database 	= $this->DB_DATABASE;
 
 		$this->connect($host,$username,$password,$database);
 	}
@@ -39,12 +27,11 @@ class MyDB
       		trigger_error('error: Could not make a database link (' . $this->link->connect_errno . ') ' . $this->link->connect_error);
 		}
 	}
+
 	public function myquery($query){
-		if (!$result = $this->link->query($query)) 
-			{
-				return false;
-				// return "error with database: (" . $this->link->errno . ") " . $this->link->error;
-			}
+		if (!$result = $this->link->query($query)){
+			return false;				
+		}
 		
 		return $result;		
 	}
@@ -114,7 +101,6 @@ class MyDB
 **/
 public function getCategoryTop() {
 		$this->clearOutput($output);
-		$sql = '';
 		$sql = "SELECT * FROM `categories` WHERE `status` = '1' AND `cat_parent` = '0'";
 
 		$res = $this->myquery($sql);
@@ -124,7 +110,6 @@ public function getCategoryTop() {
 			$output['error'] = "no data";
 			} else {
 			while ($row = $res->fetch_assoc()){
-				// $output['data'] = $row;
 				array_push($output['data'], $row);
 				}
 			}						
@@ -150,8 +135,7 @@ public function getGoods(){
 		if ($res->num_rows == 0) {
 		$output['error'] = "no data";
 		} else {
-		while ($row = $res->fetch_assoc()){
-			// $output['data'] = $row;
+		while ($row = $res->fetch_assoc()){			
 			$row['categories'] = $this->getCategoryByProductID($row['id']);
 			array_push($output['data'], $row);
 			}
@@ -182,7 +166,6 @@ public function getSingleProduct($prod_id){
 		$output['error'] = "no data";
 		} else {
 		while ($row = $res->fetch_assoc()){
-			// $output['data'] = $row;
 			$row['categories'] = $this->getCategoryByProductID($prod_id);
 			array_push($output['data'], $row);
 			}
@@ -221,7 +204,6 @@ public function getGoodsByCategoryID($cat_id){
 	foreach ($product_ids as $prod_id) {
 		$prod = $this->getSingleProduct($prod_id);
 		$prod = json_decode($prod, true);
-		// $output['data'][$prod_id] = $row['data'];
 		array_push($output['data'], $prod['data'][0]);
 	}
 	return $output;
@@ -331,6 +313,8 @@ public function deleteProduct($prod_id){
 
 	return $this->link->error;
 }
+
+
 //************************************************
 	private function clearOutput(&$output = ""){
 		$output = $this->clear;		

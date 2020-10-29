@@ -9,14 +9,14 @@
 		$product =  json_decode($mydb->getSingleProduct($prod_id), true);
 		$product = $product['data'][0];
 	}
-	?>
+?>
 	
 <!-- HEADER -->
 <header class="header">
 	<div class="container">
 		<div class="row">
-			<h1 class="col-md-6 col-lg-10 col-sm-12"><a href="/">Интернет магазин</a></h1>
-			<a class="col-md-6 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
+			<h1 class="col-md-10 col-lg-10 col-sm-12"><a href="/">Интернет магазин</a></h1>
+			<a class="col-md-2 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
 		</div>
 	</div>
 </header>
@@ -33,29 +33,37 @@
 </div>
 
 <main>
-	<div class="container">
-		
-		<div class="good wrapper">
+<div class="container">
+	<h2 class="good-item__header"><?php echo $product['prod_name']?></h2>
+	<div class="good wrapper shop-product">
+	<!-- SIDE LEFT -->
+		<div class="product-side-l">
 			<div class="good-images">
 				<div class="good-image__item">
 					<img src="img/goods.png" alt="">
-				</div>
-				
+
+				</div>				
 			</div>
-			<div class="good-item">  
-				
-				<div class="good-item__section">
-					<div>
-						<h2 class="good-item__header"><?php echo $product['prod_name']?></h2>
-						<p class="good-item__description"><?php echo $product['prod_descr']?></p>
+		</div>
+	<!-- SIDE RIGHT -->
+		<div class="product-side-r">
+			<div class="good-item__price clearfix">
+				<div><p>Цена</p></div>
+				<span class="good-item__price-value"><?php echo $product['prod_price']?></span>
+				<span class="good-item__currency">₽</span>
+			</div>
 
+			<div class="good-item__section">
+				<ul class="nav nav-tabs">
+					<li class="nav-item nav-link active">Описание</li>
+					<li class="nav-item nav-link"></li>
+				</ul>
+
+				<div class="tab-content">
+					<p class="good-item__description tab-pane active"><?php echo $product['prod_descr']?></p>
 					</div>
-					<p class="good-item__price">
-						<span class="good-item__price-value"><?php echo $product['prod_price']?></span>
-						<span class="good-item__currency">₽</span>
-					</p>
-
-				</div>
+			</div>
+			<div class="good-item">
 				<div class="good-item__buttons">
 					<button type="button" class="btn btn-good" data-idd="idd001">
 						<svg focusable="false" viewBox="0 0 24 24" class="btn-good-svg" aria-hidden="true">
@@ -70,14 +78,9 @@
 						</svg>
 					</button>
 				</div>
-
-			</div>
 		</div>
-
-
+		</div>
 	</div>
-</main>
-
-<footer></footer>
-
+</div>
+</main> 
 <?php include("template/footer.php"); ?>

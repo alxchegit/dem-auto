@@ -1,14 +1,14 @@
 <?php 
 
 /**
- * 
+ *  
  */
 class Doing extends MyDB
 {
 	 
 	 public function outCatTree($parent_id, $level, $category_arr) {
-		  if (isset($category_arr[$parent_id])) {//Если категория с таким parent_id существует
-					 echo "<ul  style='margin-top:" . ($level * 0) . "px;' class='nav navbar level-".$level."' data-level='".$level."'>";
+		  if (isset($category_arr[$parent_id])) {
+				 echo "<ul  style='margin-top:" . ($level * 0) . "px;' class='nav navbar level-".$level."' data-level='".$level."'>";
 				foreach ($category_arr[$parent_id] as $value) {  
 					
 					 echo "<li><a href=\"/?id=". $value['id'] ."&cat=".$value['cat_url']."\">".$value['cat_name']."</a>";
@@ -55,10 +55,11 @@ class Doing extends MyDB
 		  echo $html;
 	 }
 
-	 public function test($data){
-		  var_dump($data);
-	 }
-
+/**
+*
+*	Настройка SEO мета-тега Title
+*
+*/
 	public function metaTitle($prod, $id){
 		$meta_title = "Интернет магазин такойто, супер товары по низким ценам!";
 		if($prod){
@@ -72,10 +73,11 @@ class Doing extends MyDB
 
 		if($id){
 			$category = $this->getCategoryByID($id);
-			$meta_title = $category['data'][0]['meta_title'];
+			$meta_title = $category['data']['meta_title'];
 
-			if($meta_title === ""){
-				$meta_title = $category['data'][0]['cat_name'] . "в интернет магазине Такомто по низким ценам!";
+		
+			if($meta_title == ""){
+				$meta_title = $category['data']['cat_name'] . " в интернет магазине Такомто по низким ценам!";
 			}
 		}
 
@@ -83,6 +85,11 @@ class Doing extends MyDB
 		echo $meta_title;
 	}
 
+/**
+*
+*	Настройка SEO мета-тега Description
+*
+*/
 	public function metaDescription($prod, $id){
 		$meta_descr = "В Интернет магазине такомто, можно приобрести супер товары по низким ценам! МЕБЕЛь и ТелеФОны, КухНя и ТелЕвизоРЫ";
 		if($prod){
@@ -96,10 +103,10 @@ class Doing extends MyDB
 
 		if($id){
 			$category = $this->getCategoryByID($id);
-			$meta_descr = $category['data'][0]['meta_descr'];
+			$meta_descr = $category['data']['meta_descr'];
 
 			if($meta_descr === ""){
-				$meta_descr = $category['data'][0]['cat_name'] . "в интернет магазине Такомто по низким ценам! МЕБЕЛь и ТелеФОны, КухНя и ТелЕвизоРЫ";
+				$meta_descr = $category['data']['cat_name'] . " в интернет магазине Такомто по низким ценам! МЕБЕЛь и ТелеФОны, КухНя и ТелЕвизоРЫ";
 			}
 		}
 

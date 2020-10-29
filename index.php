@@ -9,8 +9,8 @@
 <header class="header">
 	<div class="container">
 		<div class="row">
-			<h1 class="col-md-6 col-lg-10 col-sm-12"><a href="/">Интернет магазин</a></h1>
-			<a class="col-md-6 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
+			<h1 class="col-md-10 col-lg-10 col-sm-12"><a href="/">Интернет магазин</a></h1>
+			<a class="col-md-2 col-lg-2" href="http://<?php echo $_SERVER['HTTP_HOST'] ?>/admin/" class="btn-right">Админка</a>
 		</div>
 	</div>
 </header>

@@ -1,10 +1,13 @@
-$("#goods-form__submit").on("click", function(){
-	
+//Кнопка добавления/создания товара
+$("#goods-form__submit").on("click", function(){	
 	goodsToDB("add", $(this));
 })
 
+// кнопка получить товары, поиск
 $("#getGoods").on("click", getGoods);
 
+// при фокусе на textarea "description" при создании товара автоматически заполняется рыба-текстом 
+// по API с сайта https://fish-text.ru
 $("#description, #goods-edit-description").on("focusin", function(){
 	let div = $(this);
 	if(div.html() === ""){
@@ -19,27 +22,28 @@ $("#description, #goods-edit-description").on("focusin", function(){
 			}
 		})
 	}
-	return true;
 });
 
+// выбор товара для редактирования в таблице
 $(".goods-edit__Tbody").on("click", "tr", function(){
 	let row = $(this);
-	let td_row = row.find("td")[0];
-	 
+	let td_row = row.find("td")[0];	 
+	
 	switchEditTabs();
-	// console.log(td_row.innerHTML)
 	putGoodsToEditForm(td_row.innerHTML);	
 });
 
+// кнопка Назад к таблице с товарами
 $(".form_div>button").on("click", switchEditTabs);
 
+// кнопка Изменить отредоктированный товар 
 $("#goods-edit-form__submit").on("click", function(){
 	let prod_id = $("#goods-edit-prod_id").html();
-	// console.log(prod_id);
-	// return;
+	
 	goodsToDB("edit", $(this), prod_id );
 });
 
+// кнопка Удалить товар
 $("#goods-edit-form__delete").on("click", deleteGoods);
 
 //FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  //
@@ -130,24 +134,6 @@ function putGoodsToEditForm(prod_id){
 	})
 }
 
-function ajax_error(jqXHR, exception){
-	let msg = '';
-	if (jqXHR.status == 404) {
-		msg = 'Страница не найдена. [404]';
-	} else if (jqXHR.status == 500) {
-		msg = 'Ошибка сервера [500].';
-	} else if (exception === 'parsererror') {
-		msg = 'Requested JSON parse failed.';
-	} else if (exception === 'timeout') {
-		msg = 'Время вышло, данные не получены.';
-	} else if (exception === 'abort') {
-		msg = 'Запрос Ajax прерван.';
-	} else {
-		msg = 'Непредвиденная ошибка.\n' + jqXHR.responseText;
-	}
-	return msg;
-}
-
 function putGoodsInTable(data) {
 	let goods = $.parseJSON(data)['data'];
 	let error = $.parseJSON(data)['error'];
@@ -174,4 +160,22 @@ function categoriesOut(cat_array){
 	}
 	html += "</ul>";
 	return html;
+}
+
+function ajax_error(jqXHR, exception){
+	let msg = '';
+	if (jqXHR.status == 404) {
+		msg = 'Страница не найдена. [404]';
+	} else if (jqXHR.status == 500) {
+		msg = 'Ошибка сервера [500].';
+	} else if (exception === 'parsererror') {
+		msg = 'Requested JSON parse failed.';
+	} else if (exception === 'timeout') {
+		msg = 'Время вышло, данные не получены.';
+	} else if (exception === 'abort') {
+		msg = 'Запрос Ajax прерван.';
+	} else {
+		msg = 'Непредвиденная ошибка.\n' + jqXHR.responseText;
+	}
+	return msg;
 }

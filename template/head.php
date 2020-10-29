@@ -1,8 +1,9 @@
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/php/db.php"; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT']."/php/functions.php"; ?>
 <?php $cat = isset($_GET['cat']) ? $_GET['cat'] : false; ?>  <!-- category url -->
-<?php $id = isset($_GET['id']) ? $_GET['id'] : false; ?> <!-- category id -->
-<?php $prod_id = isset($_GET['prod']) ? $_GET['prod'] : false; ?> <!-- product id -->
+<?php $id = isset($_GET['id']) ? $_GET['id'] : ""; ?> <!-- category id -->
+<?php $prod_id = isset($_GET['prod']) ? $_GET['prod'] : ""; ?> <!-- product id -->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
