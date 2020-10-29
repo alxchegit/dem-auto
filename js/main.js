@@ -1,44 +1,11 @@
 $("#goods-form__submit").on("click", function(){
 	
-	/*let categories = $("#goods-to-categories").val();
-	
-	categories = JSON.stringify(categories);
-	
-	let data_url = $( ".goods-add-form" ).serialize();
-		data_url += "&categories="+categories; 
-		
-	$.ajax({
-		url: "goods.php?action=add&" + data_url,
-		success: function(data){
-			alert("Товар успешно добавлен! Товар занесен в базу, id=" + data);
-			location.reload(); 
-		},
-		error: function (jqXHR, exception) {
-			alert(ajax_error(jqXHR, exception));
-			console.log(ajax_error(jqXHR, exception));
-		},
-	})*/
 	goodsToDB("add", $(this));
 })
 
-$("#getGoods").on("click", function(){
-	let div = $(".goods-edit__Tbody");
-		div.html("<tr><td colspan='7' ><div class='spinner-border text-primary' ></td></tr></div>");
-	$.ajax({
-		url:"goods.php?action=getgoods",
-		success: function(data){
+$("#getGoods").on("click", getGoods);
 
-			div.html(putGoodsInTable(data));
-			// console.log(putGoodsInTable(data));
-		},
-		error: function (jqXHR, exception) {
-			alert(ajax_error(jqXHR, exception));
-			console.log(ajax_error(jqXHR, exception));
-		},
-	})
-});
-
-$("#description").on("focusin", function(){
+$("#description, #goods-edit-description").on("focusin", function(){
 	let div = $(this);
 	if(div.html() === ""){
 		$.ajax({
@@ -73,7 +40,23 @@ $("#goods-edit-form__submit").on("click", function(){
 	goodsToDB("edit", $(this), prod_id );
 });
 
+$("#goods-edit-form__delete").on("click", deleteGoods);
+
 //FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  FUNCTIONS  //
+
+function deleteGoods(){
+	let prod_id = $("#goods-edit-prod_id").html();
+
+	$.ajax({
+		url:"goods.php?action=delete&id=" + prod_id,
+		success:function(data){
+			alert("Попытка удаление товара id=" + prod_id + "завершена!");
+			alert("Сообщение базы - \"" + data +"\"");
+			switchEditTabs();
+			getGoods();
+		},
+	});
+}
 
 function goodsToDB(action, button, prod_id = 0, ){
 	let form = button.closest("form");
@@ -101,6 +84,23 @@ function goodsToDB(action, button, prod_id = 0, ){
 function switchEditTabs(){
 	$(".goods-edit.start_table").toggleClass('active').toggleClass('fade');
 	$(".goods-edit.form_div").toggleClass('active').toggleClass('fade').toggleClass("show");
+}
+
+function getGoods(){
+	let div = $(".goods-edit__Tbody");
+		div.html("<tr><td colspan='7' ><div class='spinner-border text-primary' ></td></tr></div>");
+	$.ajax({
+		url:"goods.php?action=getgoods",
+		success: function(data){
+
+			div.html(putGoodsInTable(data));
+			// console.log(putGoodsInTable(data));
+		},
+		error: function (jqXHR, exception) {
+			alert(ajax_error(jqXHR, exception));
+			console.log(ajax_error(jqXHR, exception));
+		},
+	})
 }
 
 function putGoodsToEditForm(prod_id){

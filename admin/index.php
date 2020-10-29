@@ -1,5 +1,4 @@
 <?php include("../template/head.php"); ?>
-<!-- <?php foreach ($_SERVER as $parm => $value)  echo "$parm = '$value'<br>"; ?> -->
 	<header class="header">
 		<div class="container">
 			<div class="row">
@@ -52,8 +51,7 @@
 				<select id="goods-to-categories" class="form-control" multiple >
 					<?php 
 						$cat = $mydb->getCategoriesAll();
-						// test($cat['data']);
-						showAllCategoriesForSelect(0, 0, $cat['data']);
+						$do->showAllCategoriesForSelect(0, 0, $cat['data']);
 					 ?>
 				</select>
 			</div>						
@@ -110,7 +108,7 @@
 							<label for="goods-edit-to-categories">Категории:</label>
 							<select id="goods-edit-to-categories" class="form-control" multiple >
 								<?php 
-									showAllCategoriesForSelect(0, 0, $cat['data']);
+									$do->showAllCategoriesForSelect(0, 0, $cat['data']);
 								 ?>
 							</select>
 						</div>

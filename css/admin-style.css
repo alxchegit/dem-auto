@@ -10,6 +10,9 @@ option.level-0 {
 	padding-bottom: 25px;
 	border-radius:0 0 15px 5px;
 }
+.goods-edit-form {
+	margin-top:10px;
+}
 
 .goods-edit {
 	margin-bottom: 25px;
@@ -19,6 +22,7 @@ option.level-0 {
 	width: 100%;
 	text-align: center;
 	background-color: white;
+	margin: 10px 0px;
 }
 
 .goods-edit thead {

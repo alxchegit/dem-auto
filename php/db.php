@@ -1,26 +1,44 @@
 <?php
 
-$DB_HOSTNAME = "localhost";
-$DB_USERNAME = 'admin';
-$DB_PASSWORD = 'root';
-$DB_DATABASE = 'dem-auto';
+// $DB_HOSTNAME = "10.15.3.2";
+// $DB_USERNAME = 'admin';
+// $DB_PASSWORD = 'root';
+// $DB_DATABASE = 'dem-auto';
 
 /**
  * 
  */
 class MyDB
 {
-	
+	private $DB_HOSTNAME = "10.15.3.2";
+	private $DB_USERNAME = 'admin';
+	private $DB_PASSWORD = 'root';
+	private $DB_DATABASE = 'dem-auto';
 	private $link;
 	private $clear = array('data' => array(), 'error' => array());
 
-	public function __construct($host,$username,$password,$database){
+	/*public function __construct($host,$username,$password,$database){
 		$this->link = new mysqli($host,$username,$password,$database);
 		if ($this->link->connect_error) {
       		trigger_error('error: Could not make a database link (' . $this->link->connect_errno . ') ' . $this->link->connect_error);
 		}
 	}
-	
+	*/
+	public function __construct(){
+		$host = $this->DB_HOSTNAME;
+		$username = $this->DB_USERNAME;
+		$password = $this->DB_PASSWORD;
+		$database = $this->DB_DATABASE;
+
+		$this->connect($host,$username,$password,$database);
+	}
+
+	private function connect($host,$username,$password,$database){
+		$this->link = new mysqli($host,$username,$password,$database);
+		if ($this->link->connect_error) {
+      		trigger_error('error: Could not make a database link (' . $this->link->connect_errno . ') ' . $this->link->connect_error);
+		}
+	}
 	public function myquery($query){
 		if (!$result = $this->link->query($query)) 
 			{
@@ -177,6 +195,37 @@ public function getSingleProduct($prod_id){
 
 }
 
+/**
+*
+*	Получить список товаров в категории
+*
+*/
+
+public function getGoodsByCategoryID($cat_id){
+	$this->clearOutput($output);
+	$product_ids = array();
+	$sql = "SELECT `prod_id` FROM `product_to_cat` WHERE `product_to_cat`.`cat_id` = $cat_id";
+
+	$res = $this->myquery($sql);
+
+	if(is_object($res)){
+		if($res->num_rows == 0){
+			$output['error'] = "no data";
+		} else {
+			while ($row = $res->fetch_assoc()) {
+				array_push($product_ids, $row['prod_id']);
+			}
+		}
+	}
+
+	foreach ($product_ids as $prod_id) {
+		$prod = $this->getSingleProduct($prod_id);
+		$prod = json_decode($prod, true);
+		// $output['data'][$prod_id] = $row['data'];
+		array_push($output['data'], $prod['data'][0]);
+	}
+	return $output;
+}
 
 /**
 *
@@ -269,6 +318,19 @@ public function editProduct($data){
 	}
 
 }
+
+/**
+*
+*	Удалить товар
+*
+*/
+
+public function deleteProduct($prod_id){
+	$this->myquery("DELETE FROM `products` WHERE `products`.`id` = " . (int)$prod_id);
+	$this->myquery("DELETE FROM `product_to_cat` WHERE `prod_id` = " . (int)$prod_id);
+
+	return $this->link->error;
+}
 //************************************************
 	private function clearOutput(&$output = ""){
 		$output = $this->clear;		
@@ -292,4 +354,4 @@ public function editProduct($data){
 } //class
 
 
-$mydb = new MyDB($DB_HOSTNAME,$DB_USERNAME,$DB_PASSWORD,$DB_DATABASE);
+$mydb = new MyDB();

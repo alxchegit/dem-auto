@@ -29,6 +29,10 @@
 			$result = $mydb->editProduct($data);
 			
 			break;
+		case 'delete':
+			$result = $mydb->deleteProduct($data['id']);
+			
+			break;
 		default:
 			# code...
 			break;
