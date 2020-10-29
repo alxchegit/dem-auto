@@ -26,11 +26,6 @@
 	</div>
 </div>
 
-<!-- 
-<div>
-	
-</div>
- -->
 <!-- MAIN BODY -->
 <main>
 	<div class="container">
@@ -41,12 +36,23 @@
 				echo "Витрина интернет магазина.Главная страница";
 			}
 		?></h2>
-		<div class="goods wrapper">
-			<ul class="goods-list">				
-				<?php $do->getProducts($id); ?>
-			</ul>
-		</div>
+		<?php if($id) { ?>
+			<div class="goods wrapper">
+				<ul class="goods-list">				
+					<?php $do->getProducts($id); ?>
+				</ul>
+			</div>
+		<?php } else { ?>
+		<aside class="offer">
+            <a href="card.html#idd059">
+                <picture>
+                    <source srcset="img/b47e07ee97fd5f9bf030d258d462a945.webp" type="image/webp">
+                    <img src="img/b47e07ee97fd5f9bf030d258d462a945.jpg" alt="СЛАТТУМ">
+                </picture>
+            </a>             
+        </aside>
 
+		<?php } ?>
 	</div>
 </main>
 <!-- FOOTER -->
