@@ -1,6 +1,6 @@
 <?php 
 
-	include_once("../php/db.php");
+	require("../php/run.php");
 	$data = array();
 	$action = isset($_GET['action']) ? $_GET['action'] : false;
 	$data['name'] = isset($_GET['name']) ? $_GET['name'] : "";

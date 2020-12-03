@@ -1,5 +1,8 @@
-<?php include("template/head.php"); ?>
 
+
+<?php require $_SERVER['DOCUMENT_ROOT']."/php/run.php"; ?>
+
+<?php include("template/head.php"); ?>
 <?php 
 	if($id){
 		$category = $mydb->getCategoryByID($id); 		
@@ -39,7 +42,7 @@
 		<?php if($id) { ?>
 			<div class="goods wrapper">
 				<ul class="goods-list">				
-					<?php $do->getProducts($id); ?>
+					<?php $do->showProducts($id); ?>
 				</ul>
 			</div>
 		<?php } else { ?>

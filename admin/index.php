@@ -1,3 +1,4 @@
+<?php require $_SERVER['DOCUMENT_ROOT']."/php/run.php"; ?>
 <?php include("../template/head.php"); ?>
 <!-- HEADER -->
 	<header class="header">

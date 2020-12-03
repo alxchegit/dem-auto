@@ -5,23 +5,10 @@
  */
 class MyDB
 {
-	private $DB_HOSTNAME = "localhost";
-	private $DB_USERNAME = 'admin';
-	private $DB_PASSWORD = 'root';
-	private $DB_DATABASE = 'dem-auto';
 	private $link;
 	private $clear = array('data' => array(), 'error' => array());
 
-	public function __construct(){
-		$host 		= $this->DB_HOSTNAME;
-		$username 	= $this->DB_USERNAME;
-		$password 	= $this->DB_PASSWORD;
-		$database 	= $this->DB_DATABASE;
-
-		$this->connect($host,$username,$password,$database);
-	}
-
-	private function connect($host,$username,$password,$database){
+	public function connect($host,$username,$password,$database){
 		$this->link = new mysqli($host,$username,$password,$database);
 		if ($this->link->connect_error) {
       		trigger_error('error: Could not make a database link (' . $this->link->connect_errno . ') ' . $this->link->connect_error);
@@ -333,9 +320,9 @@ public function deleteProduct($prod_id){
 	}
 	
 	public function __destruct() {
-		$this->link->close();
+		if($this->link){
+			$this->link->close();
+
+		}
 	}
 } //class
-
-
-$mydb = new MyDB();

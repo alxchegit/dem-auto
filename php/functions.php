@@ -3,9 +3,17 @@
 /**
  *  
  */
-class Doing extends MyDB
+class Doing 
 {
-	 
+	private $db_connection;
+
+	public function __construct($mydb){
+		if($mydb){
+			$this->db_connection = $mydb;
+		} 
+
+		return false;
+	} 
 	 public function outCatTree($parent_id, $level, $category_arr) {
 		  if (isset($category_arr[$parent_id])) {
 				 echo "<ul  style='margin-top:" . ($level * 0) . "px;' class='nav navbar level-".$level."' data-level='".$level."'>";
@@ -33,8 +41,8 @@ class Doing extends MyDB
 		  }
 	 }
 
-	 public function getProducts($cat_id){
-		  $products = $this->getGoodsByCategoryID($cat_id);
+	 public function showProducts($cat_id){
+		  $products = $this->db_connection->getGoodsByCategoryID($cat_id);
 		  $html = "";
 
 		  foreach ($products['data'] as $product) {
@@ -63,7 +71,7 @@ class Doing extends MyDB
 	public function metaTitle($prod, $id){
 		$meta_title = "Интернет магазин такойто, супер товары по низким ценам!";
 		if($prod){
-			$product =  json_decode($this->getSingleProduct($prod), true);
+			$product =  json_decode($this->db_connection->getSingleProduct($prod), true);
 			$meta_title = $product['data'][0]['meta_title'];
 
 			if($meta_title === ""){
@@ -72,7 +80,7 @@ class Doing extends MyDB
 		}
 
 		if($id){
-			$category = $this->getCategoryByID($id);
+			$category = $this->db_connection->getCategoryByID($id);
 			$meta_title = $category['data']['meta_title'];
 
 		
@@ -93,7 +101,7 @@ class Doing extends MyDB
 	public function metaDescription($prod, $id){
 		$meta_descr = "В Интернет магазине такомто, можно приобрести супер товары по низким ценам! МЕБЕЛь и ТелеФОны, КухНя и ТелЕвизоРЫ";
 		if($prod){
-			$product =  json_decode($this->getSingleProduct($prod), true);
+			$product =  json_decode($this->db_connection->getSingleProduct($prod), true);
 			$meta_descr = $product['data'][0]['meta_description'];
 
 			if($meta_descr === ""){ // если пустая ячейка в таблице
@@ -102,7 +110,7 @@ class Doing extends MyDB
 		}
 
 		if($id){
-			$category = $this->getCategoryByID($id);
+			$category = $this->db_connection->getCategoryByID($id);
 			$meta_descr = $category['data']['meta_descr'];
 
 			if($meta_descr === ""){
@@ -113,5 +121,3 @@ class Doing extends MyDB
 		echo $meta_descr;
 	}
 }
-
-$do = new Doing();
